@@ -14,3 +14,5 @@ logging:
   level:
     org.springframework: WARN
     root: WARN
+llm:
+  mode: external # can be 'external' or 'internal'

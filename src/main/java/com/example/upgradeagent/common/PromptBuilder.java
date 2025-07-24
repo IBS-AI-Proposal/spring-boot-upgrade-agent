@@ -1,4 +1,4 @@
-package com.example.upgradeagent;
+package com.example.upgradeagent.common;
 
 public class PromptBuilder {
   public static String buildUpgradePrompt(String filesContent) {

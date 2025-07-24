@@ -1,4 +1,4 @@
-package com.example.upgradeagent;
+package com.example.upgradeagent.common;
 
 import java.io.IOException;
 import java.nio.file.Files;

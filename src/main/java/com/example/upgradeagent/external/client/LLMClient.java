@@ -1,4 +1,4 @@
-package com.example.upgradeagent;
+package com.example.upgradeagent.external.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
