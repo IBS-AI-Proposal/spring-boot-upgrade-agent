@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class RewriteRunner {
-    public static void runRewrite(String projectPath, String recipe) throws IOException, InterruptedException {
+    public static void runRewrite(final String projectPath, final String recipe)
+            throws IOException, InterruptedException {
         ProcessBuilder pb = new ProcessBuilder("mvn", "rewrite:run",
                 "-Drewrite.activeRecipes=" + recipe);
         pb.directory(new File(projectPath));

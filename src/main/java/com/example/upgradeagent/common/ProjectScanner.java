@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class ProjectScanner {
-    public static String loadSpringFiles(String rootPath) throws IOException {
+    public static String loadSpringFiles(final String rootPath) throws IOException {
         StringBuilder builder = new StringBuilder();
         try (Stream<Path> stream = Files.walk(Paths.get(rootPath))) {
             stream.filter(Files::isRegularFile)

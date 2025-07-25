@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class PomModifier {
-    public static void updateSpringBootVersion(String projectPath, String newVersion) throws IOException {
+    public static void updateSpringBootVersion(final String projectPath, final String newVersion) throws IOException {
         Path pom = Paths.get(projectPath, "pom.xml");
         String xml = Files.readString(pom);
         String updated = xml.replaceAll(
@@ -16,7 +16,7 @@ public class PomModifier {
         Files.writeString(pom, updated);
     }
 
-    public static void addRewritePlugin(String projectPath, String recipe) throws IOException {
+    public static void addRewritePlugin(final String projectPath, final String recipe) throws IOException {
         Path pom = Paths.get(projectPath, "pom.xml");
         String xml = Files.readString(pom);
 
@@ -53,7 +53,7 @@ public class PomModifier {
         }
     }
 
-    public static void addDependencyRewrite(String projectPath) throws IOException {
+    public static void addDependencyRewrite(final String projectPath) throws IOException {
         Path pom = Paths.get(projectPath, "pom.xml");
         String xml = Files.readString(pom);
 

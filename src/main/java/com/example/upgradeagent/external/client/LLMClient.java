@@ -26,7 +26,7 @@ public class LLMClient {
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String APPLICATION_JSON = "application/json";
 
-    public static String queryLLM(String prompt) throws IOException {
+    public static String queryLLM(final String prompt) throws IOException {
         Map<String, Object> body = Map.of(
                 MODEL, GPT_4,
                 MESSAGES, List.of(Map.of("role", "user", "content", prompt)),

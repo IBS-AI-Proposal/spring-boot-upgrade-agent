@@ -16,14 +16,14 @@ public class SpringBootUpgradeAgent implements ApplicationRunner {
     @Autowired
     private Environment env;
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication app = new SpringApplication(SpringBootUpgradeAgent.class);
         app.setWebApplicationType(WebApplicationType.NONE);
         app.run(args);
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(final ApplicationArguments args) throws Exception {
         String llmMode = env.getProperty("llm.mode", "external");
         if ("internal".equalsIgnoreCase(llmMode)) {
             InternalLLM internalLLM = InternalLLM.getInstance();
