@@ -16,5 +16,8 @@ public class PromptBuilder {
                 5. Summarize upgrade steps clearly.
                 """.formatted(filesContent);
     }
+
+    public static String prompt = "Give me the correct, existing OpenRewrite recipe ID for upgrading to Spring Boot %s — only if it exists in the official rewrite-spring module, no backticks, no formatting.\"";
+
 }
 

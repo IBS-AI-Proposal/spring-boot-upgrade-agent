@@ -16,8 +16,6 @@ WHAT AND WHY CHECKS SUPPRESSED
 -->
 
 <suppressions>
-    <suppress files="ProjectScanner.java" checks="MethodLength"/>
-    <suppress files="ProjectScanner.java" checks="EmptyCatchBlock"/>
     <suppress files="PomModifier.java" checks="LineLength"/>
     <suppress files="PomModifier.java" checks="MethodLength"/>
     <suppress files="SpringBootVersionFetcher.java" checks="MethodLength"/>

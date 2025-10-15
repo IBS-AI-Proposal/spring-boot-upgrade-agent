@@ -16,3 +16,8 @@ logging:
     root: WARN
 llm:
   mode: external # can be 'external' or 'internal'
+project:
+  path: "/Users/Vishnu/REPOS/AIDEMO/ecommerce-auditlog"
+  authKey: ${OPENAI_API_KEY}
+  endpoint: "https://models.github.ai/inference"
+  model: "openai/gpt-4.1"

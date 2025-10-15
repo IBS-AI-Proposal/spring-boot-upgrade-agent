@@ -1,12 +1,18 @@
 package com.example.upgradeagent.common;
 
+
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
+@Component
 public class PomModifier {
-    public static void updateSpringBootVersion(final String projectPath, final String newVersion) throws IOException {
+
+    public void updateSpringBootVersion(final String projectPath, final String newVersion) throws IOException {
         Path pom = Paths.get(projectPath, "pom.xml");
         String xml = Files.readString(pom);
         String updated = xml.replaceAll(
