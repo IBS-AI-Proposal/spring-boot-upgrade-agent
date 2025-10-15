@@ -12,18 +12,18 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+@Repository
 public class ExternalLLM {
 
     @Autowired
     private Environment env;
 
     public String askGpt(final String prompt) {
-
         String apiKey = env.getProperty("project.authKey");
         String endpoint = env.getProperty("project.endpoint");
         String model = env.getProperty("project.endpoint");

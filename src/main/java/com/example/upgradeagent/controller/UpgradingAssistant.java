@@ -1,13 +1,9 @@
 package com.example.upgradeagent.controller;
 
 import com.example.upgradeagent.common.PomModifier;
-import com.example.upgradeagent.common.ProjectScanner;
-import com.example.upgradeagent.common.PromptBuilder;
 import com.example.upgradeagent.common.RewriteRunner;
 import com.example.upgradeagent.common.version.SpringBootVersionFetcher;
-import com.example.upgradeagent.external.ExternalLLM;
 import com.example.upgradeagent.external.service.GPTService;
-import com.example.upgradeagent.internal.InternalLLM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -21,6 +17,9 @@ public class UpgradingAssistant {
 
     @Autowired
     private  GPTService gptService;
+
+    @Autowired
+    private SpringBootVersionFetcher springBootVersionFetcher;
 
 
     private UpgradingAssistant() {
@@ -38,19 +37,25 @@ public class UpgradingAssistant {
         String projectPath = env.getProperty("project.path"); // Read from application.yml
 
         // STEP 1 : Fetch the latest spring boot version from maven central
-        String latestSpringBootVersion = SpringBootVersionFetcher.getLatestSpringBootVersion();
+        String latestSpringBootVersion = springBootVersionFetcher.getLatestSpringBootVersion();
         System.out.println("Latest Spring Boot version: " + latestSpringBootVersion);
 
         // STEP 2 : Fetch the open rewrite recipe according to the springboot version
-        //String latestOpenReWriteVersion = "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0";
-        String latestOpenReWriteVersion = gptService.getLatestOpenRewriteRecipe(latestSpringBootVersion);
+        //String latestOpenReWriteRecipe = "org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0";
+        String latestOpenReWriteRecipe = gptService.getLatestOpenRewriteRecipe(latestSpringBootVersion);
+        System.out.println("Latest Open ReWrite Recipe: " + latestOpenReWriteRecipe);
+
 
         // STEP 3 : Run OpenRewrite recipes (via shell)
-        PomModifier.addRewritePlugin(projectPath, latestOpenReWriteVersion);
-        RewriteRunner.runRewrite(projectPath, latestOpenReWriteVersion);
+        PomModifier.addRewritePlugin(projectPath, latestOpenReWriteRecipe);
+        try {
+            RewriteRunner.runRewrite(projectPath, latestOpenReWriteRecipe);
+        } catch (Exception e) {
+            // Upgrade failed, let's send the stack trace to LLM and fix it
+        }
 
         // STEP 4 (Optional) : Git commit
-        // GitCommitHelper.commitChanges(projectPath, "Upgrade Spring Boot via AI agent");
+        // GitCommitHelper.commitChanges(projectPath, "Upgrade Spring Boot via AI prompt chaining");
 
     }
 

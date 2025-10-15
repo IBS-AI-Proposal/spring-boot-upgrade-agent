@@ -17,7 +17,23 @@ public class PromptBuilder {
                 """.formatted(filesContent);
     }
 
-    public static String prompt = "Give me the correct, existing OpenRewrite recipe ID for upgrading to Spring Boot %s — only if it exists in the official rewrite-spring module, no backticks, no formatting.\"";
+    public static String latestOpenRewritePrompt(final String version) {
+        return """
+                I want to upgrade my Spring Boot project to the latest stable version which is ,  %s
+                
+                Please:
+                1. Give me the correct, existing OpenRewrite recipe ID for upgrading to this version.
+                2. This version should exist in official rewrite-spring module.
+                3. Please avoid backticks, and formatting
+                """.formatted(version);
+    }
+
+    public static String prompt =
+                """
+                Give me the correct, existing OpenRewrite recipe ID for upgrading to Spring Boot %s — 
+                only if it exists in the official rewrite-spring module, no backticks, no formatting.
+                
+                """;
 
 }
 

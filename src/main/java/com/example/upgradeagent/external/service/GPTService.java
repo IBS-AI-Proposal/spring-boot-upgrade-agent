@@ -20,7 +20,7 @@ public class GPTService {
     private InternalLLM internalLLM;
 
     public String getLatestOpenRewriteRecipe(final String version) {
-        String prompt = String.format(PromptBuilder.prompt, version);
+        String prompt = PromptBuilder.latestOpenRewritePrompt(version);
         String llmMode = env.getProperty("llm.mode", "external");
         if ("internal".equalsIgnoreCase(llmMode)) {
             return internalLLM.askGpt(prompt).trim();

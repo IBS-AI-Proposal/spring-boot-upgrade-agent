@@ -12,16 +12,6 @@ import java.nio.file.Paths;
 @Component
 public class PomModifier {
 
-    public void updateSpringBootVersion(final String projectPath, final String newVersion) throws IOException {
-        Path pom = Paths.get(projectPath, "pom.xml");
-        String xml = Files.readString(pom);
-        String updated = xml.replaceAll(
-                "(<parent>\\s*<groupId>org.springframework.boot</groupId>\\s*<artifactId>spring-boot-starter-parent</artifactId>\\s*<version>)(.*?)(</version>)",
-                "$1" + newVersion + "$3"
-        );
-        Files.writeString(pom, updated);
-    }
-
     public static void addRewritePlugin(final String projectPath, final String recipe) throws IOException {
         Path pom = Paths.get(projectPath, "pom.xml");
         String xml = Files.readString(pom);
@@ -57,6 +47,16 @@ public class PomModifier {
             // Write the updated content back to the pom.xml
             Files.writeString(pom, xml);
         }
+    }
+
+    public void updateSpringBootVersion(final String projectPath, final String newVersion) throws IOException {
+        Path pom = Paths.get(projectPath, "pom.xml");
+        String xml = Files.readString(pom);
+        String updated = xml.replaceAll(
+                "(<parent>\\s*<groupId>org.springframework.boot</groupId>\\s*<artifactId>spring-boot-starter-parent</artifactId>\\s*<version>)(.*?)(</version>)",
+                "$1" + newVersion + "$3"
+        );
+        Files.writeString(pom, updated);
     }
 
     public static void addDependencyRewrite(final String projectPath) throws IOException {
