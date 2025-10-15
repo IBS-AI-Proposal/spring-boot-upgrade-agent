@@ -3,7 +3,7 @@ package com.example.upgradeagent.controller;
 import com.example.upgradeagent.common.PomModifier;
 import com.example.upgradeagent.common.RewriteRunner;
 import com.example.upgradeagent.common.version.SpringBootVersionFetcher;
-import com.example.upgradeagent.external.service.GPTService;
+import com.example.upgradeagent.service.GPTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;

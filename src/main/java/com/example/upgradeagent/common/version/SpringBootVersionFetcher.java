@@ -15,13 +15,15 @@ public class SpringBootVersionFetcher {
     public String getLatestSpringBootVersion() throws Exception {
         String url = "https://search.maven.org/solrsearch/select?q=g:org.springframework.boot%20AND%20a:spring-boot&rows=1&wt=json";
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .build();
+        HttpResponse<String> response;
+        try (HttpClient client = HttpClient.newHttpClient()) {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .build();
 
-        HttpResponse<String> response = client.send(request,
-                HttpResponse.BodyHandlers.ofString());
+            response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.body());
