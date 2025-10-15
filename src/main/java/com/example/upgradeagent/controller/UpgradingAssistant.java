@@ -46,9 +46,10 @@ public class UpgradingAssistant {
         System.out.println("Latest Open ReWrite Recipe: " + latestOpenReWriteRecipe);
 
 
-        // STEP 3 : Run OpenRewrite recipes (via shell)
+        // STEP 3 : Update the pom with Open rewrite recipe
         PomModifier.addRewritePlugin(projectPath, latestOpenReWriteRecipe);
         try {
+            // STEP 4 : Run the app with open rewrite command
             RewriteRunner.runRewrite(projectPath, latestOpenReWriteRecipe);
         } catch (Exception e) {
             // Upgrade failed, let's send the stack trace to LLM and fix it
